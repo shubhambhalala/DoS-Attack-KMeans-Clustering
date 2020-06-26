@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[127]:
 
 
 import numpy as np
@@ -13,7 +12,7 @@ import plotly.express as pxp
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 #importing dataset from file
-dataset= pd.read_csv('HTTPD_log.csv', names= ['IP', 'identd', 'user_id', 'time', 'time_ext','req_method', 'req_dir', 'req_http_header', 'status_code', 'bytes_trans'])
+dataset= pd.read_csv('/root/HTTPD_log.csv', names= ['IP', 'identd', 'user_id', 'time', 'time_ext','req_method', 'req_dir', 'req_http_header', 'status_code', 'bytes_trans'])
 #we only need the IP Address & Status Code
 dataset= dataset[['IP','status_code']]
 #modifying dataset by aggregating count of status code against IP Address
