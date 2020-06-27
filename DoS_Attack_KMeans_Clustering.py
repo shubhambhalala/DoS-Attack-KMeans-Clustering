@@ -1,8 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-
-
+import os
 import numpy as np
 import pandas as pd
 import plotly.graph_objs as go
@@ -24,8 +20,9 @@ train_data= dataset.drop(['IP'], axis= 1)
 
 sc= StandardScaler()
 scaled_data= sc.fit_transform(train_data)
-#We have used here 5 as a cluster because it's a good practice to give odd number due to the calculation of points which are crucial between two cluster
-model= KMeans(n_clusters= 5)
+#We have used here 3 as a cluster because it's a good practice to give odd number due to the calculation of points which are crucial between two cluster
+#This solely depends and varry from data to data
+model= KMeans(n_clusters= 3)
 pred= model.fit_predict(scaled_data)
 #here IP_Scaled is actually IndexNo because IP Address is treated as string
 pred_ds= pd.DataFrame(scaled_data, columns= ['IP_Scaled', 'status_code_Scaled','Total_Scaled'])
@@ -52,10 +49,6 @@ with open(filename, '+w') as csvfile:
             #Check whether we have the IP already in the file
             if ds['IP'].loc[index_in_data] not in np.array(csvfile): 
                 csvwriter.writerows([[ds['IP'].loc[index_in_data]]])
-
-
-# In[ ]:
-
-
-
-
+                print("Blocking IP {0}".format(ds['IP'].loc[index_in_data]))
+                #Blocking IP Address by writing a rule in iptables
+                os.system("iptables -A INPUT -s {0} -j DROP".format(ds['IP'].loc[index_in_data]))
