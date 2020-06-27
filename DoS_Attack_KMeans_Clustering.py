@@ -51,4 +51,5 @@ with open(filename, '+w') as csvfile:
                 csvwriter.writerows([[ds['IP'].loc[index_in_data]]])
                 print("Blocking IP {0}".format(ds['IP'].loc[index_in_data]))
                 #Blocking IP Address by writing a rule in iptables
+                os.system("systemctl start firewalld")
                 os.system("iptables -A INPUT -s {0} -j DROP".format(ds['IP'].loc[index_in_data]))
