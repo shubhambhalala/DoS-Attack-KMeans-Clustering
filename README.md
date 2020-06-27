@@ -25,6 +25,6 @@ Speaking of one such attack is DDoS So using the concepts and tools of devops ma
 ✔Docker images with DoS attack tool
 
 
-
+🎫Write-up: https://tinyurl.com/ycpsbqtt
 
 
